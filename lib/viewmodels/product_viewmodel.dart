@@ -3,7 +3,7 @@ import 'package:bom_hamburguer/models/product.dart';
 import 'package:bom_hamburguer/repositories/product_repository.dart';
 
 class ProductViewModel extends ChangeNotifier {
-  final ProductRepository _repository = ProductRepository();
+  final ProductRepository _repository;
   List<Product> _products = [];
   bool _isLoading = false;
 
@@ -15,7 +15,7 @@ class ProductViewModel extends ChangeNotifier {
   List<Product> get extras =>
       _products.where((p) => p.type == 'extra').toList();
 
-  ProductViewModel() {
+  ProductViewModel(this._repository) {
     fetchProducts();
   }
 
