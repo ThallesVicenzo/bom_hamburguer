@@ -7,7 +7,8 @@ import 'package:bom_hamburguer/views/widgets/cart_item_widget.dart';
 import 'package:bom_hamburguer/views/widgets/order_summary_widget.dart';
 import 'package:bom_hamburguer/views/widgets/customer_input_widget.dart';
 import 'package:bom_hamburguer/views/widgets/pay_button_widget.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:bom_hamburguer/injector.dart';
+import 'package:bom_hamburguer/l10n/global_app_localizations.dart';
 
 class CartScreen extends StatelessWidget {
   final _nameController = TextEditingController();
@@ -17,7 +18,7 @@ class CartScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cartViewModel = Provider.of<CartViewModel>(context);
-    final l10n = AppLocalizations.of(context)!;
+    final l10n = sl<GlobalAppLocalizations>().current;
 
     void pay() {
       if (_nameController.text.trim().isEmpty) {

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:bom_hamburguer/injector.dart';
+import 'package:bom_hamburguer/l10n/global_app_localizations.dart';
 
 class CustomerInputWidget extends StatelessWidget {
   final TextEditingController nameController;
@@ -11,7 +12,7 @@ class CustomerInputWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context)!;
+    final l10n = sl<GlobalAppLocalizations>().current;
 
     return Container(
       padding: const EdgeInsets.all(16),

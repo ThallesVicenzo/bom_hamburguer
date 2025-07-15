@@ -5,7 +5,8 @@ import 'package:bom_hamburguer/views/widgets/app_bar_with_cart.dart';
 import 'package:bom_hamburguer/views/widgets/welcome_section.dart';
 import 'package:bom_hamburguer/views/widgets/product_section.dart';
 import 'package:bom_hamburguer/views/widgets/promotion_info.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:bom_hamburguer/injector.dart';
+import 'package:bom_hamburguer/l10n/global_app_localizations.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -13,7 +14,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final productViewModel = Provider.of<ProductViewModel>(context);
-    final l10n = AppLocalizations.of(context)!;
+    final l10n = sl<GlobalAppLocalizations>().current;
 
     return Scaffold(
       backgroundColor: Colors.orange.shade50,

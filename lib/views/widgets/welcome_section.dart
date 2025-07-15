@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:bom_hamburguer/injector.dart';
+import 'package:bom_hamburguer/l10n/global_app_localizations.dart';
 
 class WelcomeSection extends StatelessWidget {
   const WelcomeSection({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context)!;
+    final l10n = sl<GlobalAppLocalizations>().current;
 
     return Container(
       width: double.infinity,

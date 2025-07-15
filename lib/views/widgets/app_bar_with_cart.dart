@@ -1,8 +1,10 @@
+import 'package:bom_hamburguer/viewmodels/utils/routes/app_navigator/app_navigator.dart';
+import 'package:bom_hamburguer/viewmodels/utils/routes/main_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:bom_hamburguer/viewmodels/cart_viewmodel.dart';
-import 'package:bom_hamburguer/viewmodels/utils/routes/app_navigator/app_navigator.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:bom_hamburguer/injector.dart';
+import 'package:bom_hamburguer/l10n/global_app_localizations.dart';
 
 class AppBarWithCart extends StatelessWidget implements PreferredSizeWidget {
   const AppBarWithCart({super.key});
@@ -10,7 +12,7 @@ class AppBarWithCart extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     final cartViewModel = Provider.of<CartViewModel>(context);
-    final l10n = AppLocalizations.of(context)!;
+    final l10n = sl<GlobalAppLocalizations>().current;
 
     return AppBar(
       title: Text(
@@ -27,7 +29,8 @@ class AppBarWithCart extends StatelessWidget implements PreferredSizeWidget {
           children: [
             IconButton(
               icon: const Icon(Icons.shopping_cart, color: Colors.white),
-              onPressed: () => AppNavigator(context).pushNamed('cart'),
+              onPressed: () =>
+                  AppNavigator(context).pushNamed(MainRoutes.cart.route),
             ),
             if (cartViewModel.isNotEmpty)
               Positioned(

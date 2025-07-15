@@ -3,7 +3,8 @@ import 'package:provider/provider.dart';
 import 'package:bom_hamburguer/models/product.dart';
 import 'package:bom_hamburguer/viewmodels/cart_viewmodel.dart';
 import 'package:bom_hamburguer/viewmodels/utils/formatters/currency_formatter.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:bom_hamburguer/injector.dart';
+import 'package:bom_hamburguer/l10n/global_app_localizations.dart';
 
 class ProductCard extends StatelessWidget {
   final Product product;
@@ -16,7 +17,7 @@ class ProductCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cartViewModel = Provider.of<CartViewModel>(context, listen: false);
-    final l10n = AppLocalizations.of(context)!;
+    final l10n = sl<GlobalAppLocalizations>().current;
 
     return Container(
       margin: const EdgeInsets.only(bottom: 12),
