@@ -4,21 +4,11 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 export 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-/// [GlobalAppLocalizations] gives access to localized strings without a [BuildContext];
-///
-/// [setAppLocalizations] method should be called as soon as the app context is initialized.
-///
-/// Example:
-/// ```dart
-/// final intl = GetIt.instance<GlobalAppLocalizations>().current;
-/// final text = intl.myText;
-/// ```
 abstract class GlobalAppLocalizations {
   void setAppLocalizations(AppLocalizations? localizations);
 
   AppLocalizations get current;
   Locale get locale;
-//  static String Function(String word) aOrAn;
 }
 
 class GlobalAppLocalizationsImpl extends GlobalAppLocalizations {
