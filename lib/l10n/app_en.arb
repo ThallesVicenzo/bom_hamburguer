@@ -1,0 +1,181 @@
+{
+  "@@locale": "en",
+  "appTitle": "Good Burger",
+  "@appTitle": {
+    "description": "The title of the application"
+  },
+  "welcome": "Welcome!",
+  "@welcome": {
+    "description": "Welcome message"
+  },
+  "welcomeSubtitle": "Build your perfect burger and enjoy our special discounts!",
+  "@welcomeSubtitle": {
+    "description": "Welcome subtitle message"
+  },
+  "sandwiches": "🍔 Sandwiches",
+  "@sandwiches": {
+    "description": "Sandwiches section title"
+  },
+  "extras": "🍟 Sides",
+  "@extras": {
+    "description": "Extras/sides section title"
+  },
+  "specialPromotions": "Special Promotions",
+  "@specialPromotions": {
+    "description": "Special promotions section title"
+  },
+  "promoCombo": "🎉 Sandwich + Fries + Drink = 20% discount",
+  "@promoCombo": {
+    "description": "Combo promotion text"
+  },
+  "promoDrink": "🎊 Sandwich + Drink = 15% discount",
+  "@promoDrink": {
+    "description": "Sandwich and drink promotion text"
+  },
+  "promoFries": "🎈 Sandwich + Fries = 10% discount",
+  "@promoFries": {
+    "description": "Sandwich and fries promotion text"
+  },
+  "add": "Add",
+  "@add": {
+    "description": "Add button text"
+  },
+  "myCart": "My Cart",
+  "@myCart": {
+    "description": "Cart screen title"
+  },
+  "emptyCart": "Your cart is empty",
+  "@emptyCart": {
+    "description": "Empty cart message"
+  },
+  "emptyCartSubtitle": "Add some delicious items!",
+  "@emptyCartSubtitle": {
+    "description": "Empty cart subtitle"
+  },
+  "orderSummary": "Order Summary",
+  "@orderSummary": {
+    "description": "Order summary section title"
+  },
+  "subtotal": "Subtotal:",
+  "@subtotal": {
+    "description": "Subtotal label"
+  },
+  "discount": "Discount:",
+  "@discount": {
+    "description": "Discount label"
+  },
+  "total": "Total:",
+  "@total": {
+    "description": "Total label"
+  },
+  "customerData": "Customer Data",
+  "@customerData": {
+    "description": "Customer data section title"
+  },
+  "yourName": "Your Name *",
+  "@yourName": {
+    "description": "Name input label"
+  },
+  "yourNameHint": "Enter your full name",
+  "@yourNameHint": {
+    "description": "Name input hint"
+  },
+  "finalizeOrder": "Finalize Order",
+  "@finalizeOrder": {
+    "description": "Finalize order button text"
+  },
+  "orderCreated": "Order Created!",
+  "@orderCreated": {
+    "description": "Order created dialog title"
+  },
+  "thankYou": "Thank you, {name}!",
+  "@thankYou": {
+    "description": "Thank you message",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "John"
+      }
+    }
+  },
+  "discountApplied": "Discount applied: {amount}",
+  "@discountApplied": {
+    "description": "Discount applied message",
+    "placeholders": {
+      "amount": {
+        "type": "String",
+        "example": "R$ 5.00"
+      }
+    }
+  },
+  "pleaseEnterName": "Please enter your name.",
+  "@pleaseEnterName": {
+    "description": "Validation message for empty name"
+  },
+  "cartIsEmpty": "Your cart is empty.",
+  "@cartIsEmpty": {
+    "description": "Empty cart validation message"
+  },
+  "itemAdded": "{item} added to cart!",
+  "@itemAdded": {
+    "description": "Item added success message",
+    "placeholders": {
+      "item": {
+        "type": "String",
+        "example": "X Burger"
+      }
+    }
+  },
+  "onlyOneSandwich": "You can only add one sandwich per order.",
+  "@onlyOneSandwich": {
+    "description": "Validation message for multiple sandwiches"
+  },
+  "onlyOneFries": "You can only add one portion of fries per order.",
+  "@onlyOneFries": {
+    "description": "Validation message for multiple fries"
+  },
+  "onlyOneDrink": "You can only add one soft drink per order.",
+  "@onlyOneDrink": {
+    "description": "Validation message for multiple drinks"
+  },
+  "itemAlreadyInCart": "This item is already in your cart.",
+  "@itemAlreadyInCart": {
+    "description": "Validation message for duplicate items"
+  },
+  "comboDiscount": "Complete combo: 20% discount!",
+  "@comboDiscount": {
+    "description": "Complete combo discount description"
+  },
+  "drinkDiscount": "Sandwich + Drink: 15% discount!",
+  "@drinkDiscount": {
+    "description": "Sandwich and drink discount description"
+  },
+  "friesDiscount": "Sandwich + Fries: 10% discount!",
+  "@friesDiscount": {
+    "description": "Sandwich and fries discount description"
+  },
+  "xBurger": "X Burger",
+  "@xBurger": {
+    "description": "X Burger product name"
+  },
+  "xEgg": "X Egg",
+  "@xEgg": {
+    "description": "X Egg product name"
+  },
+  "xBacon": "X Bacon",
+  "@xBacon": {
+    "description": "X Bacon product name"
+  },
+  "fries": "Fries",
+  "@fries": {
+    "description": "Fries product name"
+  },
+  "softDrink": "Soft drink",
+  "@softDrink": {
+    "description": "Soft drink product name"
+  },
+  "ok": "OK",
+  "@ok": {
+    "description": "OK button text"
+  }
+}
