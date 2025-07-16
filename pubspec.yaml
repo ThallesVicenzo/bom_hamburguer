@@ -33,10 +33,13 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   provider: ^6.1.2
-  flutter_secure_storage: ^9.2.2
   intl: any
   get_it: ^7.6.4
   go_router: ^16.0.0
+  sqflite: ^2.3.0
+  path: ^1.8.3
+  dartz: any
+  equatable: ^2.0.7
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
