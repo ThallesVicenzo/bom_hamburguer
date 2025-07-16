@@ -1,34 +1,6 @@
 # 🍔 Bom Hambúrguer
 
-*### 📱 App Preview
-
-<div align="center">
-  <h4>🏠 Home Screen</h4>
-  <p>Browse through our delicious hamburger menu</p>
-  <img src="previews/home_scree### 📱 Prévia do App
-
-<div align="center">
-  <h4>🏠 Tela Inicial</h4>
-  <p>Navegue pelo nosso delicioso menu de hambúrgueres</p>
-  <img src="previews/home_screen_pt.png" alt="Tela Inicial - Português" width="300"/>
-  
-  <h4>🛒 Carrinho de Compras</h4>
-  <p>Gerencie os itens do seu pedido com facilidade</p>
-  <img src="previews/cart_screen_pt.png" alt="Tela do Carrinho - Português" width="300"/>
-  
-  <h4>✅ Finalização</h4>
-  <p>Complete seu pedido com um processo simples de checkout</p>
-  <img src="previews/checkout_screen_pt.png" alt="Tela de Checkout - Português" width="300"/>
-</div>Home Screen - English" width="300"/>
-  
-  <h4>🛒 Shopping Cart</h4>
-  <p>Manage your order items with ease</p>
-  <img src="previews/cart_screen_en.png" alt="Cart Screen - English" width="300"/>
-  
-  <h4>✅ Checkout</h4>
-  <p>Complete your order with a simple checkout process</p>
-  <img src="previews/checkout_screen_en.png" alt="Checkout Screen - English" width="300"/>
-</div>rtuguês) | [English](#english)*
+*[Português](#português) | [English](#english)*
 
 ---
 
@@ -48,23 +20,20 @@
 - **Responsive Design**: Optimized for different screen sizes
 - **Clean Architecture**: MVVM pattern with dependency injection
 
-### � App Preview
+### 📱 App Preview
 
-<div align="center">
-  <h4>🏠 Home Screen</h4>
-  <p>Browse through our delicious hamburger menu</p>
-  <!-- Add your home screen screenshot here -->
-  
-  <h4>🛒 Shopping Cart</h4>
-  <p>Manage your order items with ease</p>
-  <!-- Add your cart screen screenshot here -->
-  
-  <h4>✅ Checkout</h4>
-  <p>Complete your order with a simple checkout process</p>
-  <!-- Add your checkout screen screenshot here -->
-</div>
+<p align="center">
+  <img src="previews/eng/IMG_0822.PNG" alt="Home Screen - English" width="250"/>
+  <img src="previews/eng/IMG_0824.PNG" alt="Cart Screen - English" width="250"/>
+  <img src="previews/eng/IMG_0826.PNG" alt="Order Confirmation - English" width="250"/>
+</p>
 
-### �🛠️ Technologies Used
+**Features shown:**
+- 🏠 **Home Screen**: Welcome message, hamburger menu, sides section, and special promotions
+- 🛒 **Cart Management**: Add/remove items, automatic discount calculation (20% combo discount)
+- ✅ **Order Confirmation**: Instant confirmation with total amount and applied discounts
+
+### 🛠️ Technologies Used
 
 - **Framework**: Flutter 3.4.3+
 - **State Management**: Provider
@@ -169,6 +138,8 @@ flutter test
 - `flutter test`: Run unit tests
 - `flutter gen-l10n`: Generate localization files
 
+---
+
 ## Português
 
 ### 📱 Sobre
@@ -185,23 +156,20 @@ flutter test
 - **Design Responsivo**: Otimizado para diferentes tamanhos de tela
 - **Arquitetura Limpa**: Padrão MVVM com injeção de dependência
 
-### � Prévia do App
+### 📱 Prévia do App
 
-<div align="center">
-  <h4>🏠 Tela Inicial</h4>
-  <p>Navegue pelo nosso delicioso menu de hambúrgueres</p>
-  <!-- Adicione aqui a captura da tela inicial -->
-  
-  <h4>🛒 Carrinho de Compras</h4>
-  <p>Gerencie os itens do seu pedido com facilidade</p>
-  <!-- Adicione aqui a captura da tela do carrinho -->
-  
-  <h4>✅ Finalização</h4>
-  <p>Complete seu pedido com um processo simples de checkout</p>
-  <!-- Adicione aqui a captura da tela de checkout -->
-</div>
+<p align="center">
+  <img src="previews/br/IMG_0817.PNG" alt="Tela Inicial - Português" width="250"/>
+  <img src="previews/br/IMG_0819.PNG" alt="Carrinho - Português" width="250"/>
+  <img src="previews/br/IMG_0820.PNG" alt="Confirmação do Pedido - Português" width="250"/>
+</p>
 
-### �🛠️ Tecnologias Utilizadas
+**Funcionalidades mostradas:**
+- 🏠 **Tela Inicial**: Mensagem de boas-vindas, menu de hambúrgueres, acompanhamentos e promoções especiais
+- 🛒 **Gestão do Carrinho**: Adicionar/remover itens, cálculo automático de desconto (20% desconto combo)
+- ✅ **Confirmação do Pedido**: Confirmação instantânea com valor total e descontos aplicados
+
+### 🛠️ Tecnologias Utilizadas
 
 - **Framework**: Flutter 3.4.3+
 - **Gerenciamento de Estado**: Provider
@@ -306,40 +274,7 @@ flutter test
 - `flutter test`: Executa testes unitários
 - `flutter gen-l10n`: Gera arquivos de localização
 
-## 📸 Screenshots
-
-### English Version (Good Burger)
-
-<p align="center">
-  <img src="previews/home_screen_en.png" alt="Welcome screen with burgers and sides menu" width="250"/>
-  <img src="previews/cart_screen_en.png" alt="Cart with items and order summary" width="250"/>
-  <img src="previews/order_confirmation_en.png" alt="Order confirmation with discount details" width="250"/>
-</p>
-
-**Features shown:**
-- 🏠 **Home Screen**: Welcome message, hamburger menu, sides section, and special promotions
-- 🛒 **Cart Management**: Add/remove items, automatic discount calculation (20% combo discount)
-- ✅ **Order Confirmation**: Instant confirmation with total amount and applied discounts
-
-### Versão em Português (Bom Hambúrguer)
-
-<p align="center">
-  <img src="previews/home_screen_pt.png" alt="Tela inicial com hambúrgueres e promoções" width="250"/>
-  <img src="previews/cart_screen_pt.png" alt="Carrinho com itens e resumo do pedido" width="250"/>
-  <img src="previews/order_confirmation_pt.png" alt="Confirmação de pedido com detalhes do desconto" width="250"/>
-</p>
-
-**Funcionalidades mostradas:**
-- 🏠 **Tela Inicial**: Mensagem de boas-vindas, menu de hambúrgueres, acompanhamentos e promoções especiais
-- 🛒 **Gestão do Carrinho**: Adicionar/remover itens, cálculo automático de desconto (20% desconto combo)
-- ✅ **Confirmação do Pedido**: Confirmação instantânea com valor total e descontos aplicados
-
-### Additional Features / Funcionalidades Adicionais
-
-- 🎯 **Smart Discounts**: Automatic combo detection (Sandwich + Fries + Drink = 20% off)
-- 🌍 **Bilingual Support**: Complete interface in English and Portuguese
-- 💾 **Persistent Cart**: SQLite database maintains cart state
-- 🎨 **Consistent UI**: Orange theme with intuitive design patterns
+---
 
 ## 🔗 Useful Links / Links Úteis
 
