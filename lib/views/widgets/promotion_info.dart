@@ -1,44 +1,61 @@
 import 'package:flutter/material.dart';
-import 'package:bom_hamburguer/injector.dart';
-import 'package:bom_hamburguer/l10n/global_app_localizations.dart';
 
 class PromotionInfo extends StatelessWidget {
-  const PromotionInfo({super.key});
+  const PromotionInfo({
+    super.key,
+    required this.title,
+    required this.promotions,
+    this.backgroundColor,
+    this.borderColor,
+    this.textColor,
+    this.icon = Icons.local_offer,
+    this.borderRadius = 12.0,
+    this.padding = const EdgeInsets.all(16),
+  });
+
+  final String title;
+  final List<String> promotions;
+  final Color? backgroundColor;
+  final Color? borderColor;
+  final Color? textColor;
+  final IconData icon;
+  final double borderRadius;
+  final EdgeInsetsGeometry padding;
 
   @override
   Widget build(BuildContext context) {
-    final l10n = sl<GlobalAppLocalizations>().current;
+    final defaultBackgroundColor = backgroundColor ?? Colors.green.shade50;
+    final defaultBorderColor = borderColor ?? Colors.green.shade200;
+    final defaultTextColor = textColor ?? Colors.green.shade700;
 
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.all(16),
+      padding: padding,
       decoration: BoxDecoration(
-        color: Colors.green.shade50,
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Colors.green.shade200),
+        color: defaultBackgroundColor,
+        borderRadius: BorderRadius.circular(borderRadius),
+        border: Border.all(color: defaultBorderColor),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             children: [
-              Icon(Icons.local_offer, color: Colors.green.shade600),
+              Icon(icon, color: defaultTextColor),
               const SizedBox(width: 8),
               Text(
-                l10n.specialPromotions,
+                title,
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
-                  color: Colors.green.shade700,
+                  color: defaultTextColor,
                 ),
               ),
             ],
           ),
           const SizedBox(height: 12),
           Text(
-            '${l10n.promoCombo}\n'
-            '${l10n.promoDrink}\n'
-            '${l10n.promoFries}',
+            promotions.join('\n'),
             style: const TextStyle(fontSize: 14),
           ),
         ],

@@ -1,28 +1,37 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:bom_hamburguer/models/product.dart';
-import 'package:bom_hamburguer/viewmodels/cart_viewmodel.dart';
 import 'package:bom_hamburguer/viewmodels/utils/formatters/currency_formatter.dart';
-import 'package:bom_hamburguer/injector.dart';
-import 'package:bom_hamburguer/l10n/global_app_localizations.dart';
 
 class ProductCard extends StatelessWidget {
   final Product product;
+  final String productName;
+  final String buttonText;
+  final String addedMessage;
+  final VoidCallback? onAddPressed;
+  final Function(String)? onError;
+  final Function(String)? onSuccess;
+  final Color primaryColor;
+  final Color backgroundColor;
 
   const ProductCard({
     super.key,
     required this.product,
+    required this.productName,
+    required this.buttonText,
+    required this.addedMessage,
+    this.onAddPressed,
+    this.onError,
+    this.onSuccess,
+    this.primaryColor = Colors.orange,
+    this.backgroundColor = Colors.white,
   });
 
   @override
   Widget build(BuildContext context) {
-    final cartViewModel = Provider.of<CartViewModel>(context, listen: false);
-    final l10n = sl<GlobalAppLocalizations>().current;
-
     return Container(
       margin: const EdgeInsets.only(bottom: 12),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: backgroundColor,
         borderRadius: BorderRadius.circular(12),
         boxShadow: [
           BoxShadow(
@@ -36,18 +45,14 @@ class ProductCard extends StatelessWidget {
       child: ListTile(
         contentPadding: const EdgeInsets.all(16),
         leading: CircleAvatar(
-          backgroundColor: Colors.orange.shade100,
+          backgroundColor: primaryColor.withValues(alpha: 0.2),
           child: Text(
-            product.type == 'sandwich'
-                ? '🍔'
-                : product.name == 'fries'
-                    ? '🍟'
-                    : '🥤',
+            _getProductEmoji(product),
             style: const TextStyle(fontSize: 20),
           ),
         ),
         title: Text(
-          _getLocalizedProductName(product, l10n),
+          productName,
           style: const TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 16,
@@ -57,73 +62,28 @@ class ProductCard extends StatelessWidget {
           CurrencyFormatter.formatCurrency(product.price),
           style: TextStyle(
             fontSize: 14,
-            color: Colors.orange.shade700,
+            color: primaryColor.withValues(alpha: 0.8),
             fontWeight: FontWeight.w600,
           ),
         ),
         trailing: ElevatedButton(
-          onPressed: () {
-            final error = cartViewModel.addItem(product);
-            if (error.isNotEmpty) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text(_getLocalizedErrorMessage(error, l10n)),
-                  backgroundColor: Colors.red,
-                ),
-              );
-            } else {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text(
-                      l10n.itemAdded(_getLocalizedProductName(product, l10n))),
-                  backgroundColor: Colors.green,
-                  duration: const Duration(seconds: 1),
-                ),
-              );
-            }
-          },
+          onPressed: onAddPressed,
           style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.orange,
+            backgroundColor: primaryColor,
             foregroundColor: Colors.white,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(8),
             ),
           ),
-          child: Text(l10n.add),
+          child: Text(buttonText),
         ),
       ),
     );
   }
 
-  String _getLocalizedProductName(Product product, AppLocalizations l10n) {
-    switch (product.name) {
-      case 'xBurger':
-        return l10n.xBurger;
-      case 'xEgg':
-        return l10n.xEgg;
-      case 'xBacon':
-        return l10n.xBacon;
-      case 'fries':
-        return l10n.fries;
-      case 'softDrink':
-        return l10n.softDrink;
-      default:
-        return product.name;
-    }
-  }
-
-  String _getLocalizedErrorMessage(String errorKey, AppLocalizations l10n) {
-    switch (errorKey) {
-      case 'onlyOneSandwich':
-        return l10n.onlyOneSandwich;
-      case 'onlyOneFries':
-        return l10n.onlyOneFries;
-      case 'onlyOneDrink':
-        return l10n.onlyOneDrink;
-      case 'itemAlreadyInCart':
-        return l10n.itemAlreadyInCart;
-      default:
-        return errorKey;
-    }
+  String _getProductEmoji(Product product) {
+    if (product.type == 'sandwich') return '🍔';
+    if (product.name == 'fries') return '🍟';
+    return '🥤';
   }
 }

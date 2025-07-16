@@ -1,38 +1,44 @@
-import 'package:bom_hamburguer/viewmodels/utils/routes/app_navigator/app_navigator.dart';
-import 'package:bom_hamburguer/viewmodels/utils/routes/main_routes.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:bom_hamburguer/viewmodels/cart_viewmodel.dart';
-import 'package:bom_hamburguer/injector.dart';
-import 'package:bom_hamburguer/l10n/global_app_localizations.dart';
 
 class AppBarWithCart extends StatelessWidget implements PreferredSizeWidget {
-  const AppBarWithCart({super.key});
+  const AppBarWithCart({
+    super.key,
+    required this.cartCount,
+    required this.title,
+    this.backgroundColor = Colors.orange,
+    this.foregroundColor = Colors.white,
+    this.onCartPressed,
+    this.elevation = 0,
+  });
+
+  final int cartCount;
+  final String title;
+  final Color backgroundColor;
+  final Color foregroundColor;
+  final VoidCallback? onCartPressed;
+  final double elevation;
 
   @override
   Widget build(BuildContext context) {
-    final cartViewModel = Provider.of<CartViewModel>(context);
-    final l10n = sl<GlobalAppLocalizations>().current;
-
     return AppBar(
       title: Text(
-        l10n.appTitle,
-        style: const TextStyle(
+        title,
+        style: TextStyle(
           fontWeight: FontWeight.bold,
-          color: Colors.white,
+          color: foregroundColor,
         ),
       ),
-      backgroundColor: Colors.orange,
-      elevation: 0,
+      backgroundColor: backgroundColor,
+      foregroundColor: foregroundColor,
+      elevation: elevation,
       actions: [
         Stack(
           children: [
             IconButton(
-              icon: const Icon(Icons.shopping_cart, color: Colors.white),
-              onPressed: () =>
-                  AppNavigator(context).pushNamed(MainRoutes.cart.route),
+              icon: Icon(Icons.shopping_cart, color: foregroundColor),
+              onPressed: onCartPressed,
             ),
-            if (cartViewModel.isNotEmpty)
+            if (cartCount > 0)
               Positioned(
                 right: 8,
                 top: 8,
@@ -47,7 +53,7 @@ class AppBarWithCart extends StatelessWidget implements PreferredSizeWidget {
                     minHeight: 16,
                   ),
                   child: Text(
-                    '${cartViewModel.itemCount}',
+                    cartCount.toString(),
                     style: const TextStyle(
                       color: Colors.white,
                       fontSize: 12,

@@ -1,25 +1,42 @@
 import 'package:flutter/material.dart';
-import 'package:bom_hamburguer/viewmodels/cart_viewmodel.dart';
 import 'package:bom_hamburguer/viewmodels/utils/formatters/currency_formatter.dart';
-import 'package:bom_hamburguer/injector.dart';
-import 'package:bom_hamburguer/l10n/global_app_localizations.dart';
 
 class OrderSummaryWidget extends StatelessWidget {
-  final CartViewModel cartViewModel;
+  final String title;
+  final String subtotalLabel;
+  final String discountLabel;
+  final String totalLabel;
+  final double subtotal;
+  final double discount;
+  final double total;
+  final String? discountDescription;
+  final Color? primaryColor;
+  final Color? discountColor;
+  final Color? backgroundColor;
 
   const OrderSummaryWidget({
     super.key,
-    required this.cartViewModel,
+    required this.title,
+    required this.subtotalLabel,
+    required this.discountLabel,
+    required this.totalLabel,
+    required this.subtotal,
+    required this.discount,
+    required this.total,
+    this.discountDescription,
+    this.primaryColor = Colors.orange,
+    this.discountColor,
+    this.backgroundColor = Colors.white,
   });
 
   @override
   Widget build(BuildContext context) {
-    final l10n = sl<GlobalAppLocalizations>().current;
+    final effectiveDiscountColor = discountColor ?? Colors.green.shade600;
 
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: backgroundColor,
         borderRadius: BorderRadius.circular(12),
         boxShadow: [
           BoxShadow(
@@ -34,7 +51,7 @@ class OrderSummaryWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            l10n.orderSummary,
+            title,
             style: const TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
@@ -44,33 +61,32 @@ class OrderSummaryWidget extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(l10n.subtotal),
-              Text(CurrencyFormatter.formatCurrency(
-                  cartViewModel.getSubtotal())),
+              Text(subtotalLabel),
+              Text(CurrencyFormatter.formatCurrency(subtotal)),
             ],
           ),
-          if (cartViewModel.getDiscount() > 0) ...[
+          if (discount > 0) ...[
             const SizedBox(height: 8),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  l10n.discount,
-                  style: TextStyle(color: Colors.green.shade600),
+                  discountLabel,
+                  style: TextStyle(color: effectiveDiscountColor),
                 ),
                 Text(
-                  '- ${CurrencyFormatter.formatCurrency(cartViewModel.getDiscount())}',
-                  style: TextStyle(color: Colors.green.shade600),
+                  '- ${CurrencyFormatter.formatCurrency(discount)}',
+                  style: TextStyle(color: effectiveDiscountColor),
                 ),
               ],
             ),
-            if (cartViewModel.getDiscountDescription().isNotEmpty) ...[
+            if (discountDescription != null &&
+                discountDescription!.isNotEmpty) ...[
               const SizedBox(height: 4),
               Text(
-                _getLocalizedDiscountDescription(
-                    cartViewModel.getDiscountDescription(), l10n),
+                discountDescription!,
                 style: TextStyle(
-                  color: Colors.green.shade600,
+                  color: effectiveDiscountColor,
                   fontSize: 12,
                   fontStyle: FontStyle.italic,
                 ),
@@ -82,18 +98,18 @@ class OrderSummaryWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                l10n.total,
+                totalLabel,
                 style: const TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
                 ),
               ),
               Text(
-                CurrencyFormatter.formatCurrency(cartViewModel.getTotal()),
-                style: const TextStyle(
+                CurrencyFormatter.formatCurrency(total),
+                style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
-                  color: Colors.orange,
+                  color: primaryColor,
                 ),
               ),
             ],
@@ -101,19 +117,5 @@ class OrderSummaryWidget extends StatelessWidget {
         ],
       ),
     );
-  }
-
-  String _getLocalizedDiscountDescription(
-      String discountKey, AppLocalizations l10n) {
-    switch (discountKey) {
-      case 'comboDiscount':
-        return l10n.comboDiscount;
-      case 'drinkDiscount':
-        return l10n.drinkDiscount;
-      case 'friesDiscount':
-        return l10n.friesDiscount;
-      default:
-        return discountKey;
-    }
   }
 }

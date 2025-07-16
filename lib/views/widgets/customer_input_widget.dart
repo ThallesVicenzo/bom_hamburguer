@@ -1,24 +1,32 @@
 import 'package:flutter/material.dart';
-import 'package:bom_hamburguer/injector.dart';
-import 'package:bom_hamburguer/l10n/global_app_localizations.dart';
 
 class CustomerInputWidget extends StatelessWidget {
   final TextEditingController nameController;
+  final String title;
+  final String labelText;
+  final String hintText;
+  final IconData? prefixIcon;
+  final Color? backgroundColor;
+  final double borderRadius;
 
   const CustomerInputWidget({
     super.key,
     required this.nameController,
+    required this.title,
+    required this.labelText,
+    required this.hintText,
+    this.prefixIcon = Icons.person,
+    this.backgroundColor = Colors.white,
+    this.borderRadius = 12.0,
   });
 
   @override
   Widget build(BuildContext context) {
-    final l10n = sl<GlobalAppLocalizations>().current;
-
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(12),
+        color: backgroundColor,
+        borderRadius: BorderRadius.circular(borderRadius),
         boxShadow: [
           BoxShadow(
             color: Colors.grey.withValues(alpha: 0.1),
@@ -32,7 +40,7 @@ class CustomerInputWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            l10n.customerData,
+            title,
             style: const TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
@@ -42,12 +50,12 @@ class CustomerInputWidget extends StatelessWidget {
           TextField(
             controller: nameController,
             decoration: InputDecoration(
-              labelText: l10n.yourName,
-              hintText: l10n.yourNameHint,
+              labelText: labelText,
+              hintText: hintText,
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(8),
               ),
-              prefixIcon: const Icon(Icons.person),
+              prefixIcon: prefixIcon != null ? Icon(prefixIcon) : null,
             ),
           ),
         ],

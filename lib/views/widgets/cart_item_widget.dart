@@ -1,28 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:bom_hamburguer/models/cart_item.dart';
-import 'package:bom_hamburguer/viewmodels/cart_viewmodel.dart';
 import 'package:bom_hamburguer/viewmodels/utils/formatters/currency_formatter.dart';
-import 'package:bom_hamburguer/injector.dart';
-import 'package:bom_hamburguer/l10n/global_app_localizations.dart';
 
 class CartItemWidget extends StatelessWidget {
   final CartItem item;
-  final CartViewModel cartViewModel;
+  final String productName;
+  final VoidCallback? onRemove;
+  final Color primaryColor;
+  final Color backgroundColor;
+  final IconData removeIcon;
+  final Color removeIconColor;
 
   const CartItemWidget({
     super.key,
     required this.item,
-    required this.cartViewModel,
+    required this.productName,
+    this.onRemove,
+    this.primaryColor = Colors.orange,
+    this.backgroundColor = Colors.white,
+    this.removeIcon = Icons.remove_circle,
+    this.removeIconColor = Colors.red,
   });
 
   @override
   Widget build(BuildContext context) {
-    final l10n = sl<GlobalAppLocalizations>().current;
-
     return Container(
       margin: const EdgeInsets.only(bottom: 12),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: backgroundColor,
         borderRadius: BorderRadius.circular(12),
         boxShadow: [
           BoxShadow(
@@ -36,18 +41,14 @@ class CartItemWidget extends StatelessWidget {
       child: ListTile(
         contentPadding: const EdgeInsets.all(16),
         leading: CircleAvatar(
-          backgroundColor: Colors.orange.shade100,
+          backgroundColor: primaryColor.withValues(alpha: 0.2),
           child: Text(
-            item.product.type == 'sandwich'
-                ? '🍔'
-                : item.product.name == 'fries'
-                    ? '🍟'
-                    : '🥤',
+            _getProductEmoji(item.product),
             style: const TextStyle(fontSize: 20),
           ),
         ),
         title: Text(
-          _getLocalizedProductName(item.product.name, l10n),
+          productName,
           style: const TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 16,
@@ -57,34 +58,21 @@ class CartItemWidget extends StatelessWidget {
           CurrencyFormatter.formatCurrency(item.product.price),
           style: TextStyle(
             fontSize: 14,
-            color: Colors.orange.shade700,
+            color: primaryColor.withValues(alpha: 0.8),
             fontWeight: FontWeight.w600,
           ),
         ),
         trailing: IconButton(
-          icon: const Icon(Icons.remove_circle, color: Colors.red),
-          onPressed: () {
-            cartViewModel.removeItem(item);
-          },
+          icon: Icon(removeIcon, color: removeIconColor),
+          onPressed: onRemove,
         ),
       ),
     );
   }
 
-  String _getLocalizedProductName(String productName, AppLocalizations l10n) {
-    switch (productName) {
-      case 'xBurger':
-        return l10n.xBurger;
-      case 'xEgg':
-        return l10n.xEgg;
-      case 'xBacon':
-        return l10n.xBacon;
-      case 'fries':
-        return l10n.fries;
-      case 'softDrink':
-        return l10n.softDrink;
-      default:
-        return productName;
-    }
+  String _getProductEmoji(dynamic product) {
+    if (product.type == 'sandwich') return '🍔';
+    if (product.name == 'fries') return '🍟';
+    return '🥤';
   }
 }

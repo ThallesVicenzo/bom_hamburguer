@@ -1,15 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:bom_hamburguer/models/product.dart';
-import 'package:bom_hamburguer/views/widgets/product_card.dart';
 
 class ProductSection extends StatelessWidget {
   final String title;
-  final List<Product> products;
+  final List<Widget> children;
+  final Color? titleColor;
+  final double titleFontSize;
+  final FontWeight titleFontWeight;
+  final double spacing;
 
   const ProductSection({
     super.key,
     required this.title,
-    required this.products,
+    required this.children,
+    this.titleColor = Colors.orange,
+    this.titleFontSize = 20.0,
+    this.titleFontWeight = FontWeight.bold,
+    this.spacing = 12.0,
   });
 
   @override
@@ -19,14 +25,14 @@ class ProductSection extends StatelessWidget {
       children: [
         Text(
           title,
-          style: const TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-            color: Colors.orange,
+          style: TextStyle(
+            fontSize: titleFontSize,
+            fontWeight: titleFontWeight,
+            color: titleColor,
           ),
         ),
-        const SizedBox(height: 12),
-        ...products.map((product) => ProductCard(product: product)),
+        SizedBox(height: spacing),
+        ...children,
       ],
     );
   }

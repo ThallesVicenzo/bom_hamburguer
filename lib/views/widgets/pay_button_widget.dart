@@ -1,29 +1,38 @@
 import 'package:flutter/material.dart';
-import 'package:bom_hamburguer/viewmodels/cart_viewmodel.dart';
-import 'package:bom_hamburguer/viewmodels/utils/formatters/currency_formatter.dart';
-import 'package:bom_hamburguer/injector.dart';
-import 'package:bom_hamburguer/l10n/global_app_localizations.dart';
 
 class PayButtonWidget extends StatelessWidget {
-  final CartViewModel cartViewModel;
   final VoidCallback onPay;
+  final String buttonText;
+  final String? priceText;
+  final Color backgroundColor;
+  final Color textColor;
+  final Color containerColor;
+  final double borderRadius;
+  final EdgeInsetsGeometry padding;
 
   const PayButtonWidget({
     super.key,
-    required this.cartViewModel,
     required this.onPay,
+    required this.buttonText,
+    this.priceText,
+    this.backgroundColor = Colors.orange,
+    this.textColor = Colors.white,
+    this.containerColor = Colors.white,
+    this.borderRadius = 12.0,
+    this.padding = const EdgeInsets.all(16),
   });
 
   @override
   Widget build(BuildContext context) {
-    final l10n = sl<GlobalAppLocalizations>().current;
+    final displayText =
+        priceText != null ? '$buttonText - $priceText' : buttonText;
 
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.all(16),
-      decoration: const BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.only(
+      padding: padding,
+      decoration: BoxDecoration(
+        color: containerColor,
+        borderRadius: const BorderRadius.only(
           topLeft: Radius.circular(20),
           topRight: Radius.circular(20),
         ),
@@ -31,15 +40,15 @@ class PayButtonWidget extends StatelessWidget {
       child: ElevatedButton(
         onPressed: onPay,
         style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.orange,
-          foregroundColor: Colors.white,
+          backgroundColor: backgroundColor,
+          foregroundColor: textColor,
           padding: const EdgeInsets.symmetric(vertical: 16),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(borderRadius),
           ),
         ),
         child: Text(
-          '${l10n.finalizeOrder} - ${CurrencyFormatter.formatCurrency(cartViewModel.getTotal())}',
+          displayText,
           style: const TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.bold,
