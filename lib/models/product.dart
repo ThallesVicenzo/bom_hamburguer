@@ -29,7 +29,7 @@ class Product {
     return Product(
       id: map['id'],
       name: map['name'],
-      price: map['price'],
+      price: (map['price'] as num).toDouble(),
       type: map['type'],
       imageUrl: map['imageUrl'],
     );

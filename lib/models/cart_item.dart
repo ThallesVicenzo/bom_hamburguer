@@ -22,7 +22,7 @@ class CartItem {
   factory CartItem.fromMap(Map<String, dynamic> map) {
     return CartItem(
       product: Product.fromMap(map['product']),
-      quantity: map['quantity'],
+      quantity: (map['quantity'] as num).toInt(),
     );
   }
 
