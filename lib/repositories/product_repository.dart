@@ -40,9 +40,10 @@ class ProductRepositoryImpl implements ProductRepository {
       });
 
       return Right(products);
-    } on DatabaseException catch (e) {
-      return Left(ServiceError('Database error: ${e.toString()}'));
     } catch (e) {
+      if (e.toString().contains('DatabaseException')) {
+        return Left(ServiceError('Database error: ${e.toString()}'));
+      }
       return Left(GenericFailure('Failed to load products: ${e.toString()}'));
     }
   }
@@ -62,9 +63,10 @@ class ProductRepositoryImpl implements ProductRepository {
       });
 
       return Right(products);
-    } on DatabaseException catch (e) {
-      return Left(ServiceError('Database error: ${e.toString()}'));
     } catch (e) {
+      if (e.toString().contains('DatabaseException')) {
+        return Left(ServiceError('Database error: ${e.toString()}'));
+      }
       return Left(
           GenericFailure('Failed to load products by type: ${e.toString()}'));
     }
@@ -85,9 +87,10 @@ class ProductRepositoryImpl implements ProductRepository {
         return Right(Product.fromMap(maps.first));
       }
       return const Right(null);
-    } on DatabaseException catch (e) {
-      return Left(ServiceError('Database error: ${e.toString()}'));
     } catch (e) {
+      if (e.toString().contains('DatabaseException')) {
+        return Left(ServiceError('Database error: ${e.toString()}'));
+      }
       return Left(
           GenericFailure('Failed to get product by id: ${e.toString()}'));
     }
@@ -111,9 +114,10 @@ class ProductRepositoryImpl implements ProductRepository {
         conflictAlgorithm: ConflictAlgorithm.replace,
       );
       return const Right(null);
-    } on DatabaseException catch (e) {
-      return Left(ServiceError('Database error: ${e.toString()}'));
     } catch (e) {
+      if (e.toString().contains('DatabaseException')) {
+        return Left(ServiceError('Database error: ${e.toString()}'));
+      }
       return Left(GenericFailure('Failed to save cart item: ${e.toString()}'));
     }
   }
@@ -144,9 +148,10 @@ class ProductRepositoryImpl implements ProductRepository {
       });
 
       return Right(cartItems);
-    } on DatabaseException catch (e) {
-      return Left(ServiceError('Database error: ${e.toString()}'));
     } catch (e) {
+      if (e.toString().contains('DatabaseException')) {
+        return Left(ServiceError('Database error: ${e.toString()}'));
+      }
       return Left(GenericFailure('Failed to get cart items: ${e.toString()}'));
     }
   }
@@ -163,9 +168,10 @@ class ProductRepositoryImpl implements ProductRepository {
         whereArgs: [productId],
       );
       return const Right(null);
-    } on DatabaseException catch (e) {
-      return Left(ServiceError('Database error: ${e.toString()}'));
     } catch (e) {
+      if (e.toString().contains('DatabaseException')) {
+        return Left(ServiceError('Database error: ${e.toString()}'));
+      }
       return Left(GenericFailure(
           'Failed to update cart item quantity: ${e.toString()}'));
     }
@@ -181,9 +187,10 @@ class ProductRepositoryImpl implements ProductRepository {
         whereArgs: [productId],
       );
       return const Right(null);
-    } on DatabaseException catch (e) {
-      return Left(ServiceError('Database error: ${e.toString()}'));
     } catch (e) {
+      if (e.toString().contains('DatabaseException')) {
+        return Left(ServiceError('Database error: ${e.toString()}'));
+      }
       return Left(
           GenericFailure('Failed to remove cart item: ${e.toString()}'));
     }
@@ -195,9 +202,10 @@ class ProductRepositoryImpl implements ProductRepository {
       final db = await _databaseService.database;
       await db.delete(_databaseService.cartTable);
       return const Right(null);
-    } on DatabaseException catch (e) {
-      return Left(ServiceError('Database error: ${e.toString()}'));
     } catch (e) {
+      if (e.toString().contains('DatabaseException')) {
+        return Left(ServiceError('Database error: ${e.toString()}'));
+      }
       return Left(GenericFailure('Failed to clear cart: ${e.toString()}'));
     }
   }
@@ -210,9 +218,10 @@ class ProductRepositoryImpl implements ProductRepository {
           'SELECT COUNT(*) as count FROM ${_databaseService.cartTable}');
       final count = result.first['count'] as int;
       return Right(count > 0);
-    } on DatabaseException catch (e) {
-      return Left(ServiceError('Database error: ${e.toString()}'));
     } catch (e) {
+      if (e.toString().contains('DatabaseException')) {
+        return Left(ServiceError('Database error: ${e.toString()}'));
+      }
       return Left(
           GenericFailure('Failed to check cart items: ${e.toString()}'));
     }
@@ -247,9 +256,10 @@ class ProductRepositoryImpl implements ProductRepository {
         return Right(cartItem);
       }
       return const Right(null);
-    } on DatabaseException catch (e) {
-      return Left(ServiceError('Database error: ${e.toString()}'));
     } catch (e) {
+      if (e.toString().contains('DatabaseException')) {
+        return Left(ServiceError('Database error: ${e.toString()}'));
+      }
       return Left(GenericFailure(
           'Failed to get cart item by product id: ${e.toString()}'));
     }
@@ -265,9 +275,10 @@ class ProductRepositoryImpl implements ProductRepository {
         conflictAlgorithm: ConflictAlgorithm.replace,
       );
       return const Right(null);
-    } on DatabaseException catch (e) {
-      return Left(ServiceError('Database error: ${e.toString()}'));
     } catch (e) {
+      if (e.toString().contains('DatabaseException')) {
+        return Left(ServiceError('Database error: ${e.toString()}'));
+      }
       return Left(GenericFailure('Failed to add product: ${e.toString()}'));
     }
   }
@@ -283,9 +294,10 @@ class ProductRepositoryImpl implements ProductRepository {
         whereArgs: [product.id],
       );
       return const Right(null);
-    } on DatabaseException catch (e) {
-      return Left(ServiceError('Database error: ${e.toString()}'));
     } catch (e) {
+      if (e.toString().contains('DatabaseException')) {
+        return Left(ServiceError('Database error: ${e.toString()}'));
+      }
       return Left(GenericFailure('Failed to update product: ${e.toString()}'));
     }
   }
@@ -300,9 +312,10 @@ class ProductRepositoryImpl implements ProductRepository {
         whereArgs: [id],
       );
       return const Right(null);
-    } on DatabaseException catch (e) {
-      return Left(ServiceError('Database error: ${e.toString()}'));
     } catch (e) {
+      if (e.toString().contains('DatabaseException')) {
+        return Left(ServiceError('Database error: ${e.toString()}'));
+      }
       return Left(GenericFailure('Failed to delete product: ${e.toString()}'));
     }
   }
