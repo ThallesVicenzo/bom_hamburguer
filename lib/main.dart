@@ -1,7 +1,7 @@
 import 'package:bom_hamburguer/l10n/global_app_localizations.dart';
-import 'package:bom_hamburguer/viewmodels/cart_viewmodel.dart';
-import 'package:bom_hamburguer/viewmodels/product_viewmodel.dart';
 import 'package:bom_hamburguer/viewmodels/utils/routes/manager/app_main_routes_manager.dart';
+import 'package:bom_hamburguer/services/database_service.dart';
+import 'package:bom_hamburguer/services/cart_service.dart';
 import 'package:flutter/material.dart';
 import 'package:bom_hamburguer/injector.dart';
 import 'package:flutter/services.dart';
@@ -16,6 +16,7 @@ void main() async {
   ]);
 
   await init();
+  await sl<DatabaseService>().database;
   runApp(const MyApp());
 }
 
@@ -24,11 +25,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (_) => ProductViewModel(sl())),
-        ChangeNotifierProvider(create: (_) => CartViewModel()),
-      ],
+    return ChangeNotifierProvider<CartService>(
+      create: (_) => sl<CartService>(),
       child: MaterialApp.router(
         title: 'Bom Hambúrguer',
         debugShowCheckedModeBanner: false,
