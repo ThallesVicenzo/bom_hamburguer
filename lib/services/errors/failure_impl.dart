@@ -7,3 +7,7 @@ class GenericFailure extends Failure {
 class ServiceError extends Failure {
   const ServiceError([String? message]) : super(message ?? 'Service error');
 }
+
+class DatabaseFailure extends Failure {
+  const DatabaseFailure([String? message]) : super(message ?? 'Database error');
+}
