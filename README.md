@@ -44,21 +44,6 @@
 - **Internationalization**: Flutter Intl
 - **Functional Programming**: Dartz
 
-### 📦 Dependencies
-
-```yaml
-dependencies:
-  flutter: sdk
-  flutter_localizations: sdk
-  provider: ^6.1.2
-  go_router: ^16.0.0
-  sqflite: ^2.3.0
-  get_it: ^7.6.4
-  dartz: any
-  equatable: ^2.0.7
-  intl: any
-```
-
 ### 🚀 Getting Started
 
 #### Prerequisites
@@ -130,16 +115,6 @@ Run tests using:
 flutter test
 ```
 
-### 📋 Available Scripts
-
-- `flutter run`: Start the development server
-- `flutter build apk`: Build Android APK
-- `flutter build ios`: Build iOS app
-- `flutter test`: Run unit tests
-- `flutter gen-l10n`: Generate localization files
-
----
-
 ## Português
 
 ### 📱 Sobre
@@ -179,21 +154,6 @@ flutter test
 - **Arquitetura**: MVVM (Model-View-ViewModel)
 - **Internacionalização**: Flutter Intl
 - **Programação Funcional**: Dartz
-
-### 📦 Dependências
-
-```yaml
-dependencies:
-  flutter: sdk
-  flutter_localizations: sdk
-  provider: ^6.1.2
-  go_router: ^16.0.0
-  sqflite: ^2.3.0
-  get_it: ^7.6.4
-  dartz: any
-  equatable: ^2.0.7
-  intl: any
-```
 
 ### 🚀 Como Começar
 
@@ -265,24 +225,3 @@ Execute os testes usando:
 ```bash
 flutter test
 ```
-
-### 📋 Scripts Disponíveis
-
-- `flutter run`: Inicia o servidor de desenvolvimento
-- `flutter build apk`: Constrói APK Android
-- `flutter build ios`: Constrói app iOS
-- `flutter test`: Executa testes unitários
-- `flutter gen-l10n`: Gera arquivos de localização
-
----
-
-## 🔗 Useful Links / Links Úteis
-
-- [Flutter Documentation](https://docs.flutter.dev/)
-- [Provider Package](https://pub.dev/packages/provider)
-- [GoRouter Package](https://pub.dev/packages/go_router)
-- [SQLite Package](https://pub.dev/packages/sqflite)
-
----
-
-*Made with ❤️ using Flutter*
