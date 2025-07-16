@@ -1,4 +1,5 @@
-import 'package:bom_hamburguer/views/cart_screen.dart';
+import 'package:bom_hamburguer/viewmodels/utils/routes/main_routes.dart';
+import 'package:bom_hamburguer/views/checkout_screen.dart';
 import 'package:bom_hamburguer/views/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -9,26 +10,24 @@ class NavigationService {
 
 final router = GoRouter(
   navigatorKey: NavigationService.navigatorKey,
-  initialLocation: '/',
+  initialLocation: MainRoutes.home.route,
   observers: [],
   routes: [
     GoRoute(
-      path: '/',
-      name: 'home',
+      path: MainRoutes.home.route,
+      name: MainRoutes.home.name,
       pageBuilder: (context, state) => MaterialPage(
         child: const HomeScreen(),
         name: state.name,
       ),
     ),
     GoRoute(
-      path: '/cart',
-      name: 'cart',
-      pageBuilder: (context, state) {
-        return MaterialPage(
-          child: CartScreen(),
-          name: state.name,
-        );
-      },
+      path: MainRoutes.checkout.route,
+      name: MainRoutes.checkout.name,
+      pageBuilder: (context, state) => MaterialPage(
+        child: const CheckoutScreen(),
+        name: state.name,
+      ),
     ),
   ],
 );

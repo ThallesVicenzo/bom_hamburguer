@@ -1,8 +1,10 @@
 enum MainRoutes {
   home('/home'),
-  cart('/cart');
+  checkout('/checkout');
 
   const MainRoutes(this.route);
 
   final String route;
+
+  String get name => toString().split('.').last;
 }
