@@ -7,7 +7,6 @@ void main() {
   late DatabaseServiceImpl databaseService;
 
   setUpAll(() {
-    // Inicializa o sqflite para testes
     sqfliteFfiInit();
     databaseFactory = databaseFactoryFfi;
   });
@@ -17,10 +16,8 @@ void main() {
   });
 
   tearDown(() async {
-    // Fecha e limpa o banco após cada teste
     await databaseService.closeDatabase();
 
-    // Remove o arquivo de banco se existir
     try {
       final db = await databaseService.database;
       final path = db.path;
@@ -30,7 +27,7 @@ void main() {
         await file.delete();
       }
     } catch (e) {
-      // Ignora erros de limpeza
+      // Ignore errors during teardown
     }
   });
 

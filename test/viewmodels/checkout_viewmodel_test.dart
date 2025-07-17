@@ -10,7 +10,6 @@ import 'package:bom_hamburguer/injector.dart';
 
 import 'checkout_viewmodel_test.mocks.dart';
 
-// Mock para GlobalAppLocalizations
 class MockGlobalAppLocalizations extends Mock
     implements GlobalAppLocalizations {
   @override

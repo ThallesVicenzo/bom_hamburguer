@@ -25,7 +25,6 @@ void main() {
   group('CartService', () {
     group('Initialization', () {
       test('should initialize with empty cart', () async {
-        // Aguarda a inicialização
         await Future.delayed(Duration.zero);
 
         expect(cartService.items, isEmpty);
@@ -36,7 +35,6 @@ void main() {
       });
 
       test('should load saved cart on initialization', () async {
-        // Arrange
         final savedItems = [
           CartItem(
               product: Product(
@@ -49,28 +47,22 @@ void main() {
         when(mockRepository.getCartItems())
             .thenAnswer((_) async => Right(savedItems));
 
-        // Act
         final newCartService = CartService(mockRepository);
         await newCartService.initializeCart();
 
-        // Assert
         expect(newCartService.items.length, equals(2));
         expect(newCartService.itemCount, equals(2));
         expect(newCartService.isEmpty, isFalse);
-        verify(mockRepository.getCartItems())
-            .called(greaterThanOrEqualTo(2)); // Pode ser chamado mais vezes
+        verify(mockRepository.getCartItems()).called(greaterThanOrEqualTo(2));
       });
 
       test('should handle error when loading saved cart', () async {
-        // Arrange
         when(mockRepository.getCartItems()).thenAnswer(
             (_) async => const Left(DatabaseFailure('Database error')));
 
-        // Act
         final newCartService = CartService(mockRepository);
         await newCartService.initializeCart();
 
-        // Assert
         expect(newCartService.items, isEmpty);
         expect(
             newCartService.errorMessage, contains('Erro ao carregar carrinho'));
@@ -79,7 +71,6 @@ void main() {
 
     group('Add Item', () {
       test('should add item to cart successfully', () async {
-        // Arrange
         final product =
             Product(id: 1, name: 'xBurger', price: 10.0, type: 'sandwich');
         when(mockRepository.getCartItems())
@@ -89,10 +80,8 @@ void main() {
 
         await cartService.initializeCart();
 
-        // Act
         final result = await cartService.addItem(product);
 
-        // Assert
         expect(result, isEmpty);
         expect(cartService.items.length, equals(1));
         expect(cartService.items.first.product.id, equals(1));
@@ -100,7 +89,6 @@ void main() {
       });
 
       test('should prevent adding duplicate item', () async {
-        // Arrange - usar um produto que não tem restrições especiais por nome
         final product =
             Product(id: 1, name: 'specialItem', price: 5.0, type: 'extra');
         final existingItems = [CartItem(product: product)];
@@ -110,17 +98,14 @@ void main() {
 
         await cartService.initializeCart();
 
-        // Act - tentar adicionar o mesmo produto (mesmo ID)
         final result = await cartService.addItem(product);
 
-        // Assert
         expect(result, equals('itemAlreadyInCart'));
         expect(cartService.items.length, equals(1));
         verifyNever(mockRepository.saveCartItem(any));
       });
 
       test('should prevent adding more than one sandwich', () async {
-        // Arrange
         final sandwich1 =
             Product(id: 1, name: 'xBurger', price: 10.0, type: 'sandwich');
         final sandwich2 =
@@ -132,23 +117,17 @@ void main() {
 
         await cartService.initializeCart();
 
-        // Act
         final result = await cartService.addItem(sandwich2);
 
-        // Assert
         expect(result, equals('onlyOneSandwich'));
         expect(cartService.items.length, equals(1));
         verifyNever(mockRepository.saveCartItem(any));
       });
 
       test('should prevent adding more than one fries', () async {
-        // Arrange
         final fries = Product(id: 1, name: 'fries', price: 5.0, type: 'extra');
-        final newFries = Product(
-            id: 2,
-            name: 'fries',
-            price: 5.0,
-            type: 'extra'); // ID diferente, mesmo nome
+        final newFries =
+            Product(id: 2, name: 'fries', price: 5.0, type: 'extra');
         final existingItems = [CartItem(product: fries)];
 
         when(mockRepository.getCartItems())
@@ -156,24 +135,18 @@ void main() {
 
         await cartService.initializeCart();
 
-        // Act
         final result = await cartService.addItem(newFries);
 
-        // Assert
         expect(result, equals('onlyOneFries'));
         expect(cartService.items.length, equals(1));
         verifyNever(mockRepository.saveCartItem(any));
       });
 
       test('should prevent adding more than one soft drink', () async {
-        // Arrange
         final drink =
             Product(id: 1, name: 'softDrink', price: 3.0, type: 'extra');
-        final newDrink = Product(
-            id: 2,
-            name: 'softDrink',
-            price: 3.0,
-            type: 'extra'); // ID diferente, mesmo nome
+        final newDrink =
+            Product(id: 2, name: 'softDrink', price: 3.0, type: 'extra');
         final existingItems = [CartItem(product: drink)];
 
         when(mockRepository.getCartItems())
@@ -181,17 +154,14 @@ void main() {
 
         await cartService.initializeCart();
 
-        // Act
         final result = await cartService.addItem(newDrink);
 
-        // Assert
         expect(result, equals('onlyOneDrink'));
         expect(cartService.items.length, equals(1));
         verifyNever(mockRepository.saveCartItem(any));
       });
 
       test('should handle save error and remove item from memory', () async {
-        // Arrange
         final product =
             Product(id: 1, name: 'xBurger', price: 10.0, type: 'sandwich');
         when(mockRepository.getCartItems())
@@ -201,10 +171,8 @@ void main() {
 
         await cartService.initializeCart();
 
-        // Act
         final result = await cartService.addItem(product);
 
-        // Assert
         expect(result, isEmpty);
         expect(cartService.items, isEmpty);
         expect(cartService.errorMessage, contains('Erro ao salvar item'));
@@ -213,7 +181,6 @@ void main() {
 
     group('Remove Item', () {
       test('should remove item from cart', () async {
-        // Arrange
         final product =
             Product(id: 1, name: 'xBurger', price: 10.0, type: 'sandwich');
         final cartItem = CartItem(product: product);
@@ -226,16 +193,13 @@ void main() {
 
         await cartService.initializeCart();
 
-        // Act
         cartService.removeItem(cartItem);
 
-        // Assert
         expect(cartService.items, isEmpty);
         verify(mockRepository.removeCartItem(1)).called(1);
       });
 
       test('should handle remove error', () async {
-        // Arrange
         final product =
             Product(id: 1, name: 'xBurger', price: 10.0, type: 'sandwich');
         final cartItem = CartItem(product: product);
@@ -248,22 +212,17 @@ void main() {
 
         await cartService.initializeCart();
 
-        // Act
         cartService.removeItem(cartItem);
 
-        // Aguardar um pouco para o método assíncrono completar
         await Future.delayed(const Duration(milliseconds: 10));
 
-        // Assert
-        expect(cartService.items,
-            isEmpty); // Item is removed from memory regardless
+        expect(cartService.items, isEmpty);
         expect(cartService.errorMessage, contains('Erro ao remover item'));
       });
     });
 
     group('Clear Cart', () {
       test('should clear all items from cart', () async {
-        // Arrange
         final existingItems = [
           CartItem(
               product: Product(
@@ -280,17 +239,14 @@ void main() {
 
         await cartService.initializeCart();
 
-        // Act
         await cartService.clearCart();
 
-        // Assert
         expect(cartService.items, isEmpty);
         expect(cartService.isEmpty, isTrue);
         verify(mockRepository.clearCart()).called(1);
       });
 
       test('should handle clear error', () async {
-        // Arrange
         when(mockRepository.getCartItems())
             .thenAnswer((_) async => const Right([]));
         when(mockRepository.clearCart()).thenAnswer(
@@ -298,19 +254,15 @@ void main() {
 
         await cartService.initializeCart();
 
-        // Act
         await cartService.clearCart();
 
-        // Assert
-        expect(cartService.items,
-            isEmpty); // Items are cleared from memory regardless
+        expect(cartService.items, isEmpty);
         expect(cartService.errorMessage, contains('Erro ao limpar carrinho'));
       });
     });
 
     group('Calculations', () {
       test('should calculate subtotal correctly', () async {
-        // Arrange
         final existingItems = [
           CartItem(
               product: Product(
@@ -328,12 +280,10 @@ void main() {
 
         await cartService.initializeCart();
 
-        // Act & Assert
         expect(cartService.getSubtotal(), equals(18.0));
       });
 
       test('should calculate 20% discount for full combo', () async {
-        // Arrange
         final existingItems = [
           CartItem(
               product: Product(
@@ -351,14 +301,12 @@ void main() {
 
         await cartService.initializeCart();
 
-        // Act & Assert
-        expect(cartService.getDiscount(), equals(3.6)); // 20% of 18.0
+        expect(cartService.getDiscount(), equals(3.6));
         expect(cartService.getDiscountDescription(), equals('comboDiscount'));
-        expect(cartService.getTotal(), equals(14.4)); // 18.0 - 3.6
+        expect(cartService.getTotal(), equals(14.4));
       });
 
       test('should calculate 15% discount for sandwich + drink', () async {
-        // Arrange
         final existingItems = [
           CartItem(
               product: Product(
@@ -373,14 +321,12 @@ void main() {
 
         await cartService.initializeCart();
 
-        // Act & Assert
-        expect(cartService.getDiscount(), equals(1.95)); // 15% of 13.0
+        expect(cartService.getDiscount(), equals(1.95));
         expect(cartService.getDiscountDescription(), equals('drinkDiscount'));
-        expect(cartService.getTotal(), equals(11.05)); // 13.0 - 1.95
+        expect(cartService.getTotal(), equals(11.05));
       });
 
       test('should calculate 10% discount for sandwich + fries', () async {
-        // Arrange
         final existingItems = [
           CartItem(
               product: Product(
@@ -395,14 +341,12 @@ void main() {
 
         await cartService.initializeCart();
 
-        // Act & Assert
-        expect(cartService.getDiscount(), equals(1.5)); // 10% of 15.0
+        expect(cartService.getDiscount(), equals(1.5));
         expect(cartService.getDiscountDescription(), equals('friesDiscount'));
-        expect(cartService.getTotal(), equals(13.5)); // 15.0 - 1.5
+        expect(cartService.getTotal(), equals(13.5));
       });
 
       test('should not apply discount for single items', () async {
-        // Arrange
         final existingItems = [
           CartItem(
               product: Product(
@@ -414,7 +358,6 @@ void main() {
 
         await cartService.initializeCart();
 
-        // Act & Assert
         expect(cartService.getDiscount(), equals(0.0));
         expect(cartService.getDiscountDescription(), isEmpty);
         expect(cartService.getTotal(), equals(10.0));
@@ -501,7 +444,7 @@ void main() {
         await cartService.initializeCart();
 
         // Act & Assert
-        expect(cartService.totalQuantity, equals(4)); // 1 + 2 + 1
+        expect(cartService.totalQuantity, equals(4));
       });
     });
   });
