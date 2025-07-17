@@ -94,8 +94,8 @@ void main() {
 
       test('should clear products list on fetch failure', () async {
         // Arrange
-        when(mockRepository.getProducts())
-            .thenAnswer((_) async => Left(ServiceError('Database error')));
+        when(mockRepository.getProducts()).thenAnswer(
+            (_) async => const Left(ServiceError('Database error')));
 
         // Act
         final viewModel = createViewModel();
@@ -284,8 +284,8 @@ void main() {
 
       test('should handle repository exceptions gracefully', () async {
         // Arrange
-        when(mockRepository.getProducts())
-            .thenAnswer((_) async => Left(ServiceError('Unexpected error')));
+        when(mockRepository.getProducts()).thenAnswer(
+            (_) async => const Left(ServiceError('Unexpected error')));
 
         // Act
         final viewModel = createViewModel();

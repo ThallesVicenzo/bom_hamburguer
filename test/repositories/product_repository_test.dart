@@ -30,7 +30,6 @@ void main() {
     mockDatabase = MockDatabase();
     repository = ProductRepositoryImpl(mockDatabaseService);
 
-    // Setup padrão
     when(mockDatabaseService.database).thenAnswer((_) async => mockDatabase);
     when(mockDatabaseService.productsTable).thenReturn('products');
     when(mockDatabaseService.cartTable).thenReturn('cart_items');

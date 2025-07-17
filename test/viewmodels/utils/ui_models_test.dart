@@ -242,7 +242,8 @@ void main() {
       test('should handle special characters in message', () {
         // Act
         final message = UIMessage(
-          message: 'Message with special chars: !@#\$%^&*()_+{}|:"<>?[]\\;\'./,`~',
+          message:
+              'Message with special chars: !@#\$%^&*()_+{}|:"<>?[]\\;\'./,`~',
           type: UIMessageType.warning,
         );
 
@@ -388,7 +389,7 @@ void main() {
 
       test('should handle very long customer name', () {
         // Arrange
-        final longName = 'John ' + 'Doe ' * 100;
+        final longName = 'John ${'Doe ' * 100}';
 
         // Act
         final orderResult = OrderResult(
@@ -413,7 +414,8 @@ void main() {
         );
 
         // Assert
-        expect(orderResult.customerName, equals('José da Silva-Santos Jr. (III)'));
+        expect(
+            orderResult.customerName, equals('José da Silva-Santos Jr. (III)'));
         expect(orderResult.customerName, contains('é'));
         expect(orderResult.customerName, contains('-'));
         expect(orderResult.customerName, contains('('));
@@ -523,7 +525,7 @@ void main() {
         expect(orderResult.total, equals(123.45));
         expect(orderResult.discount, equals(12.34));
         expect(orderResult.itemCount, equals(7));
-        
+
         // Verify calculated net total
         final netTotal = orderResult.total - orderResult.discount;
         expect(netTotal, equals(111.11));

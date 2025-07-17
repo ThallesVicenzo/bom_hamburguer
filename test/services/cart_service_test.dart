@@ -63,8 +63,8 @@ void main() {
 
       test('should handle error when loading saved cart', () async {
         // Arrange
-        when(mockRepository.getCartItems())
-            .thenAnswer((_) async => Left(DatabaseFailure('Database error')));
+        when(mockRepository.getCartItems()).thenAnswer(
+            (_) async => const Left(DatabaseFailure('Database error')));
 
         // Act
         final newCartService = CartService(mockRepository);
@@ -82,7 +82,8 @@ void main() {
         // Arrange
         final product =
             Product(id: 1, name: 'xBurger', price: 10.0, type: 'sandwich');
-        when(mockRepository.getCartItems()).thenAnswer((_) async => Right([]));
+        when(mockRepository.getCartItems())
+            .thenAnswer((_) async => const Right([]));
         when(mockRepository.saveCartItem(any))
             .thenAnswer((_) async => const Right(null));
 
@@ -193,9 +194,10 @@ void main() {
         // Arrange
         final product =
             Product(id: 1, name: 'xBurger', price: 10.0, type: 'sandwich');
-        when(mockRepository.getCartItems()).thenAnswer((_) async => Right([]));
+        when(mockRepository.getCartItems())
+            .thenAnswer((_) async => const Right([]));
         when(mockRepository.saveCartItem(any))
-            .thenAnswer((_) async => Left(DatabaseFailure('Save error')));
+            .thenAnswer((_) async => const Left(DatabaseFailure('Save error')));
 
         await cartService.initializeCart();
 
@@ -241,8 +243,8 @@ void main() {
 
         when(mockRepository.getCartItems())
             .thenAnswer((_) async => Right(existingItems));
-        when(mockRepository.removeCartItem(1))
-            .thenAnswer((_) async => Left(DatabaseFailure('Remove error')));
+        when(mockRepository.removeCartItem(1)).thenAnswer(
+            (_) async => const Left(DatabaseFailure('Remove error')));
 
         await cartService.initializeCart();
 
@@ -250,7 +252,7 @@ void main() {
         cartService.removeItem(cartItem);
 
         // Aguardar um pouco para o método assíncrono completar
-        await Future.delayed(Duration(milliseconds: 10));
+        await Future.delayed(const Duration(milliseconds: 10));
 
         // Assert
         expect(cartService.items,
@@ -289,9 +291,10 @@ void main() {
 
       test('should handle clear error', () async {
         // Arrange
-        when(mockRepository.getCartItems()).thenAnswer((_) async => Right([]));
-        when(mockRepository.clearCart())
-            .thenAnswer((_) async => Left(DatabaseFailure('Clear error')));
+        when(mockRepository.getCartItems())
+            .thenAnswer((_) async => const Right([]));
+        when(mockRepository.clearCart()).thenAnswer(
+            (_) async => const Left(DatabaseFailure('Clear error')));
 
         await cartService.initializeCart();
 
@@ -447,8 +450,8 @@ void main() {
 
       test('should return false on error', () async {
         // Arrange
-        when(mockRepository.hasCartItems())
-            .thenAnswer((_) async => Left(DatabaseFailure('Database error')));
+        when(mockRepository.hasCartItems()).thenAnswer(
+            (_) async => const Left(DatabaseFailure('Database error')));
 
         // Act
         final result = await cartService.hasStoredCart();
@@ -461,8 +464,8 @@ void main() {
     group('Error Handling', () {
       test('should clear error message', () async {
         // Arrange
-        when(mockRepository.getCartItems())
-            .thenAnswer((_) async => Left(DatabaseFailure('Database error')));
+        when(mockRepository.getCartItems()).thenAnswer(
+            (_) async => const Left(DatabaseFailure('Database error')));
 
         await cartService.initializeCart();
         expect(cartService.errorMessage, isNotNull);
