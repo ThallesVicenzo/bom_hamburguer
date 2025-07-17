@@ -1,3 +1,4 @@
+import 'package:bom_hamburguer/viewmodels/utils/routes/app_navigator/app_navigator.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:bom_hamburguer/viewmodels/checkout_viewmodel.dart';
@@ -51,7 +52,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
           actions: [
             TextButton(
               onPressed: () {
-                Navigator.of(context).pop();
+                AppNavigator(context).pop();
                 viewModel.completeOrder();
               },
               child: Text(l10n.ok),
